@@ -1,0 +1,9 @@
+nltk~=3.8.1
+numpy~=1.26.2
+RUTTS~=0.1.13
+tensorflow~=2.15.0
+tokenizers~=0.13.3
+torch~=2.1.1
+transformers~=4.33.3
+ruaccent~=1.5.4.1
+networkx~=2.8.8
