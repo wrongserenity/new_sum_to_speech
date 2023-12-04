@@ -23,11 +23,13 @@ if __name__ == "__main__":
     news_tts = NewsTts()
     news_summarizer = NewsSummarizer()
 
-    extr_text = news_summarizer.get_text_extract_sum(SAMPLE_TEXT)
-    print(extr_text)
+    extr_text = news_summarizer.get_text_extract_sum(SAMPLE_TEXT, n=3)
     abst_text = news_summarizer.get_text_abstract_sum(extr_text)
-    print(abst_text)
 
     audio_sum = news_tts.get_audio(abst_text[0])
     news_tts.play_audio(audio_sum)
     news_tts.save_wav_of_tts(audio_sum)
+
+    print("Original: ", len(SAMPLE_TEXT), "symbols\n", SAMPLE_TEXT.replace(". ", ".\n"))
+    print("\nExtracted summary:", len(extr_text), "symbols\n", extr_text.replace(". ", ".\n"))
+    print("\nAbstracted summary:", len(abst_text[0]), "symbols\n", abst_text)

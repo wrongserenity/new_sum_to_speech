@@ -6,7 +6,7 @@ from nltk.tokenize import sent_tokenize, RegexpTokenizer
 from transformers import AutoModelForSeq2SeqLM, T5TokenizerFast
 
 MODEL_NAME = 'UrukHan/t5-russian-summarization'
-MAX_INPUT = 256
+MAX_INPUT = 512
 
 
 class NewsSummarizer:
