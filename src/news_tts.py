@@ -70,9 +70,11 @@ class NewsTts:
     def play_audio(self, audio):
         self.tts.play_audio(audio)
 
-    def save_wav_of_tts(self, audio, file_name="temp.wav", save_path="./result/speech/"):
+    def save_wav_of_tts(self, audio, file_name="temp.ogg", save_path="./result/speech/"):
         full_path = save_path + file_name
+        print(full_path)
         self.tts.save_wav(audio, full_path)
+        return '.' + full_path
 
     def get_audio(self, text):
         stressed_text = self.accentizer.process_all(text)
