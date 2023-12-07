@@ -74,7 +74,7 @@ class NewsTts:
         full_path = save_path + file_name
         print(full_path)
         self.tts.save_wav(audio, full_path)
-        return full_path
+        return '.' + full_path
 
     def get_audio(self, text):
         stressed_text = self.accentizer.process_all(text)
