@@ -7,3 +7,6 @@ torch~=2.1.1
 transformers~=4.33.3
 ruaccent~=1.5.4.1
 networkx~=2.8.8
+spacy~=3.7.2
+pymorphy2~=0.8
+num2words~=0.5.13
