@@ -18,9 +18,7 @@ from datetime import date, timedelta
 # config = configparser.ConfigParser() # Define the method to read the configuration file
 # config.read('config.ini') # read config.ini file
 
-api_id = 15489406
-api_hash = '642ae04cd34a5f47344cf62d1b679604'
-BOT_TOKEN = '6761056220:AAHN1gAAkN0W6OxN21FBG1YvbPK_F42MrZk'
+
 
 # Create the client and the session called session_master. We start the session as the Bot (using bot_token)
 client = TelegramClient('anon', api_id, api_hash).start(bot_token=BOT_TOKEN)
