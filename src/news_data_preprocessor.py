@@ -39,35 +39,40 @@ class NewsDataPreprocessor:
         self.nlp = spacy.load("ru_core_news_sm")
 
     def process_text(self, input_text_):
-        doc = self.nlp(input_text_)
-        result_words = []
-
-        is_need_extend_abbr = False
-
-        for i in range(len(doc)):
-            if doc[i].like_num:
-                case = self.get_case_in_neighbour_words(doc, i)
-                result_words.append(self.convert_num_to_word_with_case(doc[i].text, case))
-                continue
-            result_words.append(doc[i].text)
-            if doc[i].text in DOMAIN_ABBR_DICT.keys():
-                is_need_extend_abbr = True
-        result_text = " ".join(result_words)
-
-        if is_need_extend_abbr:
-            doc = self.nlp(result_text)
+        try:
+            doc = self.nlp(input_text_)
             result_words = []
+
+            is_need_extend_abbr = False
+
             for i in range(len(doc)):
-                if doc[i].text in DOMAIN_ABBR_DICT:
+                if doc[i].is_digit:
+                    print(doc[i].text)
                     case = self.get_case_in_neighbour_words(doc, i)
-                    result_words.append(self.convert_word_to_case(DOMAIN_ABBR_DICT[doc[i].text], case))
+                    result_words.append(self.convert_num_to_word_with_case(doc[i].text, case))
                     continue
                 result_words.append(doc[i].text)
+                if doc[i].text in DOMAIN_ABBR_DICT.keys():
+                    is_need_extend_abbr = True
             result_text = " ".join(result_words)
-        return self.process_punctuation(result_text)
+
+            if is_need_extend_abbr:
+                doc = self.nlp(result_text)
+                result_words = []
+                for i in range(len(doc)):
+                    if doc[i].text in DOMAIN_ABBR_DICT:
+                        case = self.get_case_in_neighbour_words(doc, i)
+                        result_words.append(self.convert_word_to_case(DOMAIN_ABBR_DICT[doc[i].text], case))
+                        continue
+                    result_words.append(doc[i].text)
+                result_text = " ".join(result_words)
+            return self.process_punctuation(result_text)
+        except Exception as e:
+            print("Parser: ", e)
+            exit(0)
 
     def get_case_in_neighbour_words(self, doc_, index_):
-        if doc_[index_].like_num:
+        if doc_[index_].is_digit:
             for ix in NEIGHBOURS_IDXS[::-1]:
                 is_noun = ix > 0
                 is_prep = ix < 0

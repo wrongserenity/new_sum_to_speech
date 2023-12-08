@@ -6,7 +6,7 @@ class DB:
         self.host = 'localhost'
         self.user = 'postgres'
         self.password = 'postgres'
-        self.database = 'parsing'
+        self.database = 'parsed_url'
         self.table_name = 'parsed_url'
 
     def conn(self):
@@ -15,7 +15,7 @@ class DB:
                                     user=self.user, password=self.password)
             print('Connect to db')
         except Exception as e:
-            print(e)
+            print("DB: ", e)
             exit(0)
 
         conn.autocommit = True

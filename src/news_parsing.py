@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 import re
+
+from src.news_data_preprocessor import NewsDataPreprocessor
 from src.sql import DB
 from src.news_summarizer import NewsSummarizer
 from src.news_tts import NewsTts
@@ -12,6 +14,7 @@ class Parser:
         self.news_tts = NewsTts()
         self.news_summarizer = NewsSummarizer()
         self.db = DB()
+        self.news_preprocessor = NewsDataPreprocessor()
 
     def cleanhtml(self, raw_html):
         CLEANR = re.compile('<.*?>')
@@ -61,6 +64,8 @@ class Parser:
             # self.write_to_file('\n' * 3)
             extr_text = self.news_summarizer.get_text_extract_sum('\n'.join(texts), n=3)
             # abst_text = self.news_summarizer.get_text_abstract_sum(extr_text)
+            print(extr_text)
+            extr_text = self.news_preprocessor.process_text(extr_text)
 
             audio_sum = self.news_tts.get_audio(extr_text)
             id = str(int(self.db.select_max_id()) + 1)
@@ -69,7 +74,7 @@ class Parser:
             params = {'url': url, 'text': extr_text, 'path_to_audio': path_to_audio, 'article_date': date_text}
             self.db.new_row(params)
         except Exception as e:
-            print(e)
+            print("Parser: ", e)
             exit(0)
 
 
