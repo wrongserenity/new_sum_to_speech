@@ -1,3 +1,5 @@
+bert-score~=0.3.13
+datasets~=2.15.0
 nltk~=3.8.1
 numpy~=1.26.2
 RUTTS~=0.1.13
@@ -15,3 +17,7 @@ beautifulsoup4~=4.11.2
 spacy~=3.7.2
 pymorphy2~=0.8
 num2words~=0.5.13
+wordcloud~=1.9.3
+stop-words~=2018.7.23
+matplotlib~=3.8.2
+tqdm~=4.66.1
