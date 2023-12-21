@@ -2,11 +2,13 @@ FROM python:3.10
 
 WORKDIR /usr/app/src
 
-COPY . .
-COPY requirements.txt .
+ADD . .
 
 RUN pip install -r requirements.txt
+RUN apt update
+RUN apt install -y libportaudio2
+RUN python -m spacy download ru_core_news_sm
+RUN pip install lxml
+RUN chmod a+x run.sh
 
-RUN crontab crontab
-
-CMD ["crond", "-f"]
+CMD ["./run.sh"]

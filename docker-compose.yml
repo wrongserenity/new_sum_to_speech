@@ -1,7 +1,6 @@
 services:
-  pythonapp:
+  mainapp:
     build: ./src/
-    command: sh -c "python3 bot.py"
     depends_on:
       - postgres
 
@@ -9,7 +8,7 @@ services:
     build: ./db/
     restart: always
     environment:
-      - POSTGRES_USER=postgres
+      - POSTGRES_USER=root
       - POSTGRES_PASSWORD=postgres
     ports:
       - '5432:5432'

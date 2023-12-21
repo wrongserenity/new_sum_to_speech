@@ -1,1 +1,4 @@
-/model/
+/src/model/
+/src/result/models_abs_sum/
+/src/result/speech/
+/src/result/tag_clouds/
