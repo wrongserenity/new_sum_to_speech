@@ -50,8 +50,13 @@
 выставляет ранки предложений и выдает N самых "важных" предложений
  
 ### абстрактная суммаризация
-временно подгружается модель t5-russian-summarization c HuggingFace
-но сейчас пытаемся дообучить модель rut5-base на данных с IlyaGusev/gazeta
+используется дообученная модель на основе модели реконструкции замаскированных токенов [rut5-base](https://arxiv.org/abs/2309.10931) 
+- на данных с [IlyaGusev/gazeta](https://huggingface.co/datasets/IlyaGusev/gazeta)  
+- алгоритм обучения в [news_abstr_sum_training.py](https://github.com/wrongserenity/news_sum_to_speech/blob/main/src/news_abstr_sum_training.py)  
+- саму модель можно подгрузить с hugging face: [wrongserenity/news_to_speech_t5_summarizer](https://huggingface.co/wrongserenity/news_to_speech_t5_summarizer)  
+
+Результаты дообучения модели rut5-base на датасете IlyaGusev/gazeta:  
+![image](https://github.com/wrongserenity/news_sum_to_speech/assets/43683367/ba2bfa67-7a5a-4863-b611-3e3fdbbfaa39)
  
 ### облако тегов
 на основе tf-idf, nltk и wordcloud
@@ -64,10 +69,4 @@
 
 `docker-compose up --build`
 
-## Дополнительная информация
-
-Для работы абстрактивной суммаризации нужна модель. Torch файл весит около 1гб, поэтому залить в гитхаб не удалось. Можем отправить архив или использовать модель wrongserenity/news_to_speech_t5_summarizer с hugging face.
-
-Результаты дообучения модели rut5-base на датасете IlyaGusev/gazeta:
-![image](https://github.com/wrongserenity/news_sum_to_speech/assets/43683367/ba2bfa67-7a5a-4863-b611-3e3fdbbfaa39)
 
